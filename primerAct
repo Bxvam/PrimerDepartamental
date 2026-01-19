@@ -1,0 +1,25 @@
+def contar_caracteres_seguro(nombre_archivo):
+    try:
+
+        with open(nombre_archivo, 'r', encoding='utf-8') as archivo:
+            contenido = archivo.read()
+            # Esto elimina los espacios y saltos antes de contar
+            return len(contenido.replace(" ", "").replace("\n", "").replace("\r", ""))
+
+    except FileNotFoundError:
+        return "Error: El archivo no fue encontrado, verifica el nombre"
+
+    except PermissionError:
+        return "Error: No tienes permiso para leer este archivo"
+
+    except Exception as e:
+        return f"Ocurrió un error desconocido: {e}"
+
+#archivo_inexistente = "archivo_fantasma.txt"
+#resultado_error = contar_caracteres_seguro(archivo_inexistente)
+#print(f"Prueba de error: {resultado_error}")
+
+mi_archivo = "poema.txt"
+
+resultado_real = contar_caracteres_seguro(mi_archivo)
+print(f"Conteo del archivo real: {resultado_real}")
